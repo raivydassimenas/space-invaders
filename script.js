@@ -1,6 +1,6 @@
 $(document).ready(function() {
     const canvas = document.querySelector("#game-canvas");
-    canvas.width = 400;
+    canvas.width = 200;
     canvas.height = 400;
     const ctx = canvas.getContext('2d');
     initializeCanvas(ctx);
@@ -22,8 +22,8 @@ function initializeCanvas(ctx) {
     for (let i = 0; i < 40; i++) {
         invaders.push(new Image());
         invaders[invaders.length - 1].src = "./assets/Alien\ icon.png";
-        invaders[invaders.length - 1].height = 10;
-        invaders[invaders.length - 1].width = 10;
+        invaders[invaders.length - 1].height = 20;
+        invaders[invaders.length - 1].width = 20;
     }
 
     let loadedImages = 0;
@@ -38,9 +38,9 @@ function initializeCanvas(ctx) {
 
     function drawInvaders(invaders, ctx) {
         invaders.forEach(function(image, index) {
-            const x = 10 * (index % 8);
-            const y = 10 * (Math.floor(index / 8));
-            ctx.drawImage(image, x, y, 19, 10);
+            const x = 20 * (index % 8);
+            const y = 20 * (Math.floor(index / 8));
+            ctx.drawImage(image, x, y, 20, 20);
         })
     }
 }
