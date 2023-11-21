@@ -1,0 +1,30 @@
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin: 0;
+}
+
+#game-canvas {
+    height: 400px;
+    width: 400px;
+    border: 2px black solid;
+}
+
+.player {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+.invader {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+}
+
+footer {
+    text-align: right;
+    margin: 0.5rem;
+}
