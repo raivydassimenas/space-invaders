@@ -1,6 +1,7 @@
 const figureHeight = 25;
 const figureWidth = 25;
-const invaderSpeed = 5;
+const playerSpeed = 5;
+const invaderSpeed = 1;
 const canvas = document.querySelector("#game-canvas");
 canvas.width = 200;
 canvas.height = 400;
@@ -8,11 +9,11 @@ canvas.height = 400;
 $(document).ready(function() {
     
     const ctx = canvas.getContext('2d');
-    initializeCanvas(ctx);
+    playGame(ctx);
 
 });
 
-function initializeCanvas(ctx) {
+function playGame(ctx) {
     const image = new Image();
 
     image.src = "./assets/Space\ invaders\ icon.png";
@@ -22,12 +23,23 @@ function initializeCanvas(ctx) {
     const player = {
         image,
         x: 0,
-        y: 375
+        y: canvas.height - figureHeight
     }
 
-    player.image.onload = function() {
+    function drawPlayer() {
         ctx.drawImage(player.image, player.x, player.y, figureWidth, figureHeight);
     }
+
+    $(document).keydown(function(event) {
+        if (event.key === "ArrowLeft" && player.x > 0) {
+            player.x -= playerSpeed;
+        }
+        else if (event.key === "ArrowRight" && player.x < canvas.width - figureWidth) {
+            player.x += playerSpeed;
+        }
+    });
+
+    player.image.onload = drawPlayer;
 
     const invaders = [];
     for (let i = 0; i < 40; i++) {
@@ -48,35 +60,37 @@ function initializeCanvas(ctx) {
         invader.image.onload = function() {
             loadedImages++;
             if (loadedImages === invaders.length) {
-                drawInvaders(invaders, ctx);
+                drawInvaders();
             }
         }
-    })
+    });
 
     function drawInvaders() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         invaders.forEach(function(invader) {
             ctx.drawImage(invader.image, invader.x, invader.y, figureWidth, figureHeight);
-        })
+        });
     }
 
     function moveInvaders() {
         invaders.forEach(invader => {
-            if (invader.x + 10 > canvas.length) {
+            if (invader.x + invaderSpeed + 1 > canvas.width) {
                 invader.x = 0;
-                invader.y += 25;
+                invader.y += figureHeight;
             } else {
-                invader.x += 5;
+                invader.x += invaderSpeed;
             }
         })
     }
 
     function update() {
         moveInvaders();
-        drawInvaders()
+        drawInvaders();
+        drawPlayer();
+        requestAnimationFrame(update);
     }
 
-    (function playGame() {
-        setInterval(update, 1000 / 30);
+    (function() {
+        update();
     })();
 }
