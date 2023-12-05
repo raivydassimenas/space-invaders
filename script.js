@@ -75,8 +75,8 @@ $(document).ready(function() {
 
     function moveInvaders() {
         invaders.forEach(invader => {
-            if (invader.x + invaderSpeed + 1 > canvas.width) {
-                invader.x = 0;
+            if (invaders[invaders.length - 1].x + invaderSpeed + 1 > canvas.width) {
+                invader.x = invader.x + invaderSpeed + 1 > canvas.width ? 0 : invader.x + invaderSpeed;
                 invader.y += figureHeight;
                 if (invader.y > canvas.height - 2 * figureHeight) {
                     lives--;
