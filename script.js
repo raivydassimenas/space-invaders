@@ -96,7 +96,7 @@ $(document).ready(function () {
         invader.y += figureHeight;
         if (invader.y > canvas.height - 2 * figureHeight) {
           lives--;
-          if (lives < 0) {
+          if (lives <= 0) {
             gameOver();
           }
           $("#lives").text(`Lives: ${lives}`);
@@ -129,7 +129,7 @@ $(document).ready(function () {
           bullet.y + bulletHeight > player.y
         ) {
           lives--;
-          if (lives < 0) {
+          if (lives <= 0) {
             gameOver();
           }
           $("#lives").text(`Lives: ${lives}`);
@@ -142,6 +142,7 @@ $(document).ready(function () {
   function restartGame() {
     invaders = [];
     createInvaders();
+    invaderBullets = [];
     player = {};
     createPlayer();
 
@@ -150,11 +151,15 @@ $(document).ready(function () {
 
   function gameOver() {
     highPoints.push(points);
-    highPoints.sort((a, b) => a - b);
+    highPoints.sort((a, b) => b - a);
+    points = 0;
+    lives = 3;
+
+    console.log(highPoints);
 
     $("#game-container").hide();
     $("#high-score-table").html(
-      `<div><p>High points</p><p>1: ${highPoints[0]}</p><p>2: ${highPoints[1]}</p><p>3: ${highPoints[2]}</p><p>4: ${highPoints[3]}</p><p>5: ${highPoints[4]}</p></div>`
+      `<div><p>High points</p><p>1: ${highPoints[0]}</p><p>2: ${highPoints[1]}</p><p>3: ${highPoints[2]}</p><p>4: ${highPoints[3]}</p><p>5: ${highPoints[4]}</p><p>Press space to begin</p></div>`
     );
     $("#high-score-table").show();
     gamePaused = true;
@@ -227,7 +232,7 @@ $(document).ready(function () {
 
   $("#game-container").hide();
   $("#high-score-table").html(
-    `<div><p>High points</p><p>1: ${highPoints[0]}</p><p>2: ${highPoints[1]}</p><p>3: ${highPoints[2]}</p><p>4: ${highPoints[3]}</p><p>5: ${highPoints[4]}</p></div>`
+    `<div><p>High points</p><p>1: ${highPoints[0]}</p><p>2: ${highPoints[1]}</p><p>3: ${highPoints[2]}</p><p>4: ${highPoints[3]}</p><p>5: ${highPoints[4]}</p><p>Press space to begin</p></div>`
   );
   $("#high-score-table").show();
 });

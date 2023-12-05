@@ -29,6 +29,10 @@
     margin: 0;
 }
 
+#high-score-table-container > p {
+    text-align: center;
+}
+
 #high-score-table {
     border: 2px black solid;
     padding: 0.5rem;
