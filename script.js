@@ -161,7 +161,7 @@ $(document).ready(function () {
     $("#high-score-table").html(
       `<div><p>High points</p><p>1: ${highPoints[0]}</p><p>2: ${highPoints[1]}</p><p>3: ${highPoints[2]}</p><p>4: ${highPoints[3]}</p><p>5: ${highPoints[4]}</p><p>Press space to begin</p></div>`
     );
-    $("#high-score-table").show();
+    $("#high-score-table-container").show();
     gamePaused = true;
   }
 
@@ -234,5 +234,5 @@ $(document).ready(function () {
   $("#high-score-table").html(
     `<div><p>High points</p><p>1: ${highPoints[0]}</p><p>2: ${highPoints[1]}</p><p>3: ${highPoints[2]}</p><p>4: ${highPoints[3]}</p><p>5: ${highPoints[4]}</p><p>Press space to begin</p></div>`
   );
-  $("#high-score-table").show();
+  $("#high-score-table-container").show();
 });
